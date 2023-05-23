@@ -1,0 +1,11 @@
+.dashboard_history
+{
+  display: flex;
+}
+
+#is-out
+{
+    margin-left: 5px;
+    color: rgb(160, 160, 160);
+    
+}
