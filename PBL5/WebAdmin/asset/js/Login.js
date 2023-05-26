@@ -33,7 +33,7 @@ function hanldeLogin(data) {
       swal({ title: "Success", type: "success" });
       setTimeout(() => {
         window.location.assign("./Dashboard.html");
-      }, 1000);
+      }, 500);
     } else {
       swal({ title: "The username or password is incorrect", type: "error" });
     }

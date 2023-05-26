@@ -4,6 +4,8 @@ using WebAPI.Data;
 using WebAPI.Model;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.Authentication;
+
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
@@ -20,7 +22,7 @@ namespace WebAPI.Controllers
         public IActionResult GetAll()
         {
             List<HistoryModel> list = new List<HistoryModel>();
-            foreach (History i in _context.History.ToList().OrderBy(p => p.time))
+            foreach (History i in _context.History.ToList().OrderByDescending(p => p.time))
             {
                 HistoryModel model = new HistoryModel
                 {
@@ -41,7 +43,18 @@ namespace WebAPI.Controllers
             text = text.Trim();
             List<HistoryModel> list = new List<HistoryModel>();
             List<History> list_Filter = new List<History>();
-            list_Filter = _context.History.Where(x => x.id_history.Contains(text) == true || x.number_plate.Contains(text) == true).ToList();
+            if(text == "Go_in")
+            {
+                list_Filter = _context.History.Where(x => x.isout == true).ToList();
+            }
+            else if (text == "Go_out")
+            {
+                list_Filter = _context.History.Where(x => x.isout == false).ToList();
+            }
+            else
+            {
+                list_Filter = _context.History.Where(x => x.id_history.Contains(text) == true || x.number_plate.Contains(text) == true).ToList();
+            }
             if (list_Filter != null)
             {
                 foreach (History i in list_Filter)
@@ -83,6 +96,32 @@ namespace WebAPI.Controllers
                     number_plate = history.number_plate
                 };
                 return Ok(model);
+            }
+        }
+
+
+        [HttpGet]
+        public IActionResult CheckState(string number_plate)
+        {
+            History history = _context.History
+           .Where(u => u.number_plate == number_plate)
+           .OrderByDescending(p => p.time)
+           .FirstOrDefault();
+            if (history == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                HistoryModel model = new HistoryModel
+                {
+                    id_history = history.id_history,
+                    isout = history.isout,
+                    time = history.time,
+                    image = history.image,
+                    number_plate = history.number_plate
+                };
+                return Ok(model.isout);
             }
         }
 

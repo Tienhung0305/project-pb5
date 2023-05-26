@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\Tienh\Desktop\PBL5\PBL5\Publish</_PublishTargetUrl>
-    <History>True|2023-04-08T20:32:51.5053430Z;True|2023-04-09T02:11:50.4412790+07:00;True|2023-04-08T07:29:53.8876212+07:00;True|2023-04-08T07:28:13.8127581+07:00;True|2023-04-08T04:46:11.8069559+07:00;True|2023-04-08T04:44:57.9380051+07:00;True|2023-04-08T04:36:44.7493313+07:00;True|2023-04-08T04:09:04.6574644+07:00;</History>
+    <History>True|2023-05-26T06:56:57.7499931Z;False|2023-05-26T13:56:44.2376935+07:00;True|2023-05-26T13:32:22.4450894+07:00;False|2023-05-26T13:31:57.5886810+07:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

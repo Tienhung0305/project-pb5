@@ -61,10 +61,10 @@ function AddTable(data) {
     <div class = "table_date">${array[0]}</div>
     <div class = "table_time">${array[1]}</div>
     `;
-    if (data.isout == true) {
+    if (data.isout == false) {
       tdElement5.innerHTML = "Go out";
     }
-    if (data.isout == false) {
+    if (data.isout == true) {
       tdElement5.innerHTML = "Go in";
     }
     tdElement8.innerHTML = `<button id="bt_edit" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_edit" value="${data.id_history}" onclick="on_ModalEdit(${data.id_history})" >Edit</button>`;
@@ -118,7 +118,7 @@ function LoandModalEdit(id) {
       document.getElementById("select").value = data.number_plate;
       document.getElementById("datepicker").value = array[0];
       document.getElementById("timepicker").value = array[1];
-      if (data.isout == 1) {
+      if (data.isout == 0) {
         document.getElementById("radio_getInto").checked = false;
         document.getElementById("radio_getOut").checked = true;
       } else {
@@ -137,8 +137,8 @@ function on_Edit(id_history) {
   var isout;
   if (
     (document.getElementById(`radio_getInto`).value = true
-      ? (isout = true)
-      : (isout = false))
+      ? (isout = false)
+      : (isout = true))
   );
   let api = patch + "api/History/Put";
   let data = {
@@ -214,7 +214,14 @@ document.getElementById("search_id").addEventListener("click", function () {
 });
 
 function Filter(id, callback) {
+  if (id == "Go in") {
+    id = "Go_in";
+  }
+  if (id == "Go out") {
+    id = "Go_out";
+  }
   var api = patch + `api/History/Filter?text=${id}`;
+  console.log(api);
   fetch(api)
     .then(function (res) {
       if (res.status == 200) {
