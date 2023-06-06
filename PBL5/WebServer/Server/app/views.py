@@ -25,25 +25,51 @@ old_plate_in = None
 @api_view(['GET'])
 @renderer_classes([JSONRenderer])
 def start_in(request):
-    number_plate, check = plate_detect_cam_in()
-    if(check):    
-        return Response(str(number_plate), status=status.HTTP_200_OK)
+    number_plate, check, check_car_in = plate_detect_cam_in()
+    if(check):
+        if(check_car_in):
+            print("state:" + str(check_car_in))
+            return Response(str(number_plate), status=status.HTTP_200_OK)
+        else:
+            print("state:" + str(check_car_in))
+            return Response(str(number_plate), status=status.HTTP_401_UNAUTHORIZED)
     else:
         return Response("", status=status.HTTP_400_BAD_REQUEST)
-    
+
 @api_view(['GET'])
 @renderer_classes([JSONRenderer])
 def start_out(request):
-    number_plate, check = plate_detect_cam_out()
-    if(check):    
-        return Response(str(number_plate), status=status.HTTP_200_OK)
+
+    number_plate, check, check_car_state = plate_detect_cam_out()
+    if(check):
+        if(not(check_car_state)):
+            print("state:" + str(check_car_state))
+            return Response(str(number_plate), status=status.HTTP_401_UNAUTHORIZED)
+         
+        else:
+            print("state:" + str(check_car_state))
+            return Response(str(number_plate), status=status.HTTP_200_OK)
+          
     else:
         return Response("", status=status.HTTP_400_BAD_REQUEST)
 
+def check_state(plate_detect_number):
+    url = "http://localhost:1994/api/History/CheckState?number_plate="+plate_detect_number
+    payload = {}
+    headers = {}
+    response = requests.request("GET",url,headers =  headers,data = payload)
+    state = (response.text)
+    if(state=='false'):
+        return 0  
+    if(state=='true'):
+        return 1
+    else:
+        return 3
+    
 
 def plate_detect_cam_in():
     global old_plate_in
-    urlcam = "http://192.168.83.56/"
+    urlcam = "http://172.20.10.7/"
 
     fileName = 'img_cam_in.jpg'
     imgResponse = urlrequest.urlopen(urlcam+"capture")
@@ -99,16 +125,15 @@ def plate_detect_cam_in():
     
     public_id  = dt_string.replace("-","").replace(":","").replace(" ","") # Public ID mà bạn muốn chỉ định cho ảnh
                 
-    cv2.imwrite(fileName,image)
-    cv2.imwrite("border_"+fileName,frame_temp)
+    cv2.imwrite(fileName,frame_temp)
+    cv2.imwrite("border_"+fileName,image)
     url = "http://localhost:1994/api/Vehicle/CheckInvalid?number_plate="+plate_info
     payload = {}
     headers = {}
     response = requests.request("GET",url,headers =  headers,data = payload)
-    print("\nresponse: ",response.status_code)
+    check_car_in = False
     if(response.status_code == 200 ):
-        
-        if(old_plate_in != plate_info):
+        if(check_state(plate_info) != 1):
             upload_result = cloudinary.uploader.upload("border_"+fileName, public_id=public_id, filename=public_id)
             image_url = upload_result['secure_url']
             url = "http://localhost:1994/api/History/Post"
@@ -123,14 +148,15 @@ def plate_detect_cam_in():
             headers = {"Content-Type": "application/json"}
             response = requests.post(url, data=json.dumps(data), headers=headers)
             old_plate_in = plate_info
+            check_car_in = True
         isValidPlate = True
         
-    return plate_info, isValidPlate
+    return plate_info, isValidPlate, check_car_in
 
 
 def plate_detect_cam_out():
     global old_plate_out
-    urlcam = "http://192.168.83.84/"
+    urlcam = "http://172.20.10.6/"
 
     fileName = 'img_cam_out.jpg'
     imgResponse = urlrequest.urlopen(urlcam+"capture")
@@ -185,16 +211,16 @@ def plate_detect_cam_out():
     
     public_id  = dt_string.replace("-","").replace(":","").replace(" ","") # Public ID mà bạn muốn chỉ định cho ảnh
                 
-    cv2.imwrite(fileName,image)
-    cv2.imwrite("border_"+fileName,frame_temp)
+    cv2.imwrite(fileName,frame_temp)
+    cv2.imwrite("border_"+fileName,image)
 
     url = "http://localhost:1994/api/Vehicle/CheckInvalid?number_plate="+plate_info
     payload = {}
     headers = {}
     response = requests.request("GET",url,headers =  headers,data = payload)
-    print("\nresponse: ",response.status_code)
+    check_car_out = False
     if(response.status_code == 200 ):
-        if(old_plate_out != plate_info):
+        if(check_state(plate_info) != 0):
             old_plate_out = plate_info
             upload_result = cloudinary.uploader.upload("border_"+fileName, public_id=public_id, filename=public_id)
             image_url = upload_result['secure_url']
@@ -209,6 +235,7 @@ def plate_detect_cam_out():
             }
             headers = {"Content-Type": "application/json"}
             response = requests.post(url, data=json.dumps(data), headers=headers)
+            check_car_out = True
         isValidPlate = True
         
-    return plate_info, isValidPlate
+    return plate_info, isValidPlate, check_car_out
