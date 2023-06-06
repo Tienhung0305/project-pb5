@@ -67,10 +67,7 @@ function AddTable(data) {
     if (data.isout == true) {
       tdElement5.innerHTML = "Go in";
     }
-    tdElement8.innerHTML = `<button id="bt_edit" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_edit" value="${data.id_history}" onclick="on_ModalEdit(${data.id_history})" >Edit</button>`;
-    tdElement9.innerHTML = `<button id="bt_delete" type="button" class="btn btn-danger" onclick="on_Delete(${data.id_history})" value="${data.id_history}">Delete</button>`;
-    tdElement6.appendChild(tdElement8);
-    tdElement7.appendChild(tdElement9);
+
 
     trElement.appendChild(tdElement1);
     trElement.appendChild(tdElement2);

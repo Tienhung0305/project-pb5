@@ -1,4 +1,4 @@
-use garagemanagement;
+historyhistoryuse garagemanagement;
 
 INSERT INTO `person` (`id_person`, `name`, `gender`, `phoneNumber`, `email`) VALUES
 (100001, 'Nguyen Van Te', 'Nữ', '0763617282', 'ntu97232@gmail.com'),
@@ -12,28 +12,18 @@ INSERT INTO `account` (`id_account`, `username`, `password`) VALUES ('200002', '
 
 
 INSERT INTO `vehicle` (`number_plate`, `car_manufacturer`, `name_vehide`, `color`, `id_person`) VALUES
-('38K199999', 'Lamborghini', 'AVENTADOR LP 780-4 ULTIMAE', 'Blue', 100001),
-('38K99999', 'Honda', 'ACCORD', 'Black', 100002),
-('51F88838', 'Lamborghini', 'URUS-S', 'Yellow', 100003),
+('29V555555', 'Lamborghini', 'AVENTADOR LP 780-4 ULTIMAE', 'Blue', 100001),
+('98K102897', 'Lamborghini', 'ACCORD', 'Black', 100002),
+('18A21443', 'Honda', 'URUS-S', 'Yellow', 100003),
 ('92K012345', 'Lamborghini', 'AVENTADOR', 'RED', 100004);
 
-INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('1', '0', '2023-04-05 16:27:32.000000', 'xe38k1999999', '38K199999');
-INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('2', '1', '2023-04-05 19:27:32.000000', 'xe38k1999999', '38K199999');
-INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('3', '0', '2023-04-04 16:27:32.000000', 'xe38k1999999', '38K199999');
-INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('4', '1', '2023-04-04 19:27:32.000000', 'xe38k1999999', '38K199999');
-INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('5', '0', '2023-04-03 16:27:32.000000', 'xe38k1999999', '38K199999');
-INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('6', '1', '2023-04-03 19:27:32.000000', 'xe38k1999999', '38K199999');
+INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('1', '1', '2023-04-04 16:27:32.000000', 'x1', '29V555555');
+INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('2', '0', '2023-04-04 16:30:32.000000', 'x1', '29V555555');
+INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('3', '1', '2023-04-04 16:35:32.000000', 'x2', '98K102897');
+INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('4', '0', '2023-04-04 16:40:32.000000', 'x2', '98K102897');
+INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('5', '1', '2023-04-04 17:35:32.000000', 'x1', '18A21443');
 
-INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('7', '0', '2023-04-05 16:28:32.000000', 'xe90B299999', '92K012345');
-INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('8', '1', '2023-04-05 19:28:32.000000', 'xe90B299999', '92K012345');
-INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('9', '0', '2023-04-04 16:28:32.000000', 'xe90B299999', '92K012345');
-INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('10', '1', '2023-04-04 19:28:32.000000', 'xe90B299999', '92K012345');
-INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('11', '0', '2023-04-03 16:28:32.000000', 'xe90B299999', '92K012345');
-INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('12', '1', '2023-04-03 19:28:32.000000', 'xe90B299999', '92K012345');
+INSERT INTO `space` (`id`, `number_space`) VALUES ('1', '1');
 
-INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('13', '0', '2023-04-05 16:23:32.000000', 'xe51F88838', '51F88838');
-INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('14', '1', '2023-04-05 19:23:32.000000', 'xe51F88838', '51F88838');
-INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('15', '0', '2023-04-04 16:23:32.000000', 'xe51F88838', '51F88838');
-INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('16', '1', '2023-04-04 19:23:32.000000', 'xe51F88838', '51F88838');
-INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('17', '0', '2023-04-03 16:23:32.000000', 'xe51F88838', '51F88838');
-INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('18', '1', '2023-04-03 19:23:32.000000', 'xe51F88838', '51F88838');
+
+
