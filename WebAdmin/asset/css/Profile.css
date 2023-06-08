@@ -1,0 +1,81 @@
+.hd_edit {
+  color: #3c91e6;
+}
+
+.hd_delete {
+  color: rgb(238, 50, 51);
+}
+
+#body {
+  font-size: 14px;
+}
+
+#bt_edit,
+#bt_delete {
+  font-size: 14px;
+}
+
+.modal_text {
+  margin-bottom: 30px;
+  margin-left: -1px;
+}
+
+#staticBackdropLabel {
+  color: #3c91e6;
+}
+
+.modal_lable {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form-check-label {
+  margin-right: 20px;
+}
+
+.form-check-label {
+  font-size: 14px;
+}
+
+.bt_Add {
+  background-color: #3c91e6;
+  margin-top: 40px;
+}
+
+.button {
+  background-color: #d2d2d2;
+  width: 55px;
+  height: 30px;
+  border-radius: 200px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+}
+
+.button::before {
+  position: absolute;
+  content: "";
+  background-color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 200px;
+  margin: 5px;
+  transition: transform 0.3s ease;
+}
+
+input:checked + .button {
+  background-color: #20096d;
+}
+
+input:checked + .button::before {
+  transform: translateX(25px);
+  transition: transform 0.3s ease;
+}
+
+.checkActive {
+  display: none;
+}
+
+.hd_active {
+  padding-left: 10px;
+}
