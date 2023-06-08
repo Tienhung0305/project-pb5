@@ -26,6 +26,7 @@ namespace WebAPI.Controllers
                 PersonModel model = new PersonModel
                 {
                     id_person = i.id_person,
+                    active= i.active,
                     name = i.name,
                     gender = i.gender,
                     phoneNumber = i.phoneNumber,
@@ -55,6 +56,7 @@ namespace WebAPI.Controllers
                     PersonModel model = new PersonModel
                     {
                         id_person = i.id_person,
+                        active = i.active,
                         name = i.name,
                         gender = i.gender,
                         phoneNumber = i.phoneNumber,
@@ -81,6 +83,7 @@ namespace WebAPI.Controllers
                 PersonModel model = new PersonModel
                 {
                     id_person = person.id_person,
+                    active = person.active,
                     name = person.name,
                     gender = person.gender,
                     phoneNumber = person.phoneNumber,
@@ -100,10 +103,27 @@ namespace WebAPI.Controllers
             }
             else
             {
-                person.name = personModel.name;
+                person.active = personModel.active;
+                person.name = personModel.name;         
                 person.gender = personModel.gender;
                 person.phoneNumber = personModel.phoneNumber;
                 person.email = personModel.email;
+                _context.SaveChanges();
+                return Ok();
+            }
+        }
+
+        [HttpPut]
+        public IActionResult PutActive(int id, bool active)
+        {
+            Person person = _context.Person.FirstOrDefault(u => u.id_person == id);
+            if (person == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                person.active = active;
                 _context.SaveChanges();
                 return Ok();
             }
@@ -120,10 +140,12 @@ namespace WebAPI.Controllers
             {
                 Person person = new Person
                 {
+                    active = model.active,
                     name = model.name,
                     gender = model.gender,
                     phoneNumber = model.phoneNumber,
-                    email = model.email
+                    email = model.email,
+
                 };
                 _context.Person.Add(person);
                 _context.SaveChanges();

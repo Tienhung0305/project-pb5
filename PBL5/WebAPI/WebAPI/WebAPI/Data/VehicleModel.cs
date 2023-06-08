@@ -12,6 +12,5 @@
 
         public int id_person { get; set; }
 
-
     }
 }

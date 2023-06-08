@@ -1,11 +1,11 @@
-historyhistoryuse garagemanagement;
+use garagemanagement;
 
-INSERT INTO `person` (`id_person`, `name`, `gender`, `phoneNumber`, `email`) VALUES
-(100001, 'Nguyen Van Te', 'Nữ', '0763617282', 'ntu97232@gmail.com'),
-(100002, 'Nguyen Van B', 'Nam', '0763237345', 'ntu9123239@gmail.com'),
-(100003, 'Nguyen Van C', 'Nữ', '0763171931', 'ntu912339@gmail.com'),
-(100004, 'Nguyen Van E', 'Nam', '0763128581', 'ntu972123@gmail.com'),
-(100005, 'Nguyen Van F', 'Nam', '0763165812', 'ntu9721239@gmail.com');
+INSERT INTO `person` (`id_person`, `active` ,`name`, `gender`, `phoneNumber`, `email`) VALUES
+(100001, 1,'Nguyen Van Te', 'Nữ', '0763617282', 'ntu97232@gmail.com'),
+(100002, 1,'Nguyen Van B', 'Nam', '0763237345', 'ntu9123239@gmail.com'),
+(100003, 1,'Nguyen Van C', 'Nữ', '0763171931', 'ntu912339@gmail.com'),
+(100004, 1,'Nguyen Van E', 'Nam', '0763128581', 'ntu972123@gmail.com'),
+(100005, 0,'Nguyen Van F', 'Nam', '0763165812', 'ntu9721239@gmail.com');
 
 INSERT INTO `account` (`id_account`, `username`, `password`) VALUES ('200001', 'admin1', '12345');
 INSERT INTO `account` (`id_account`, `username`, `password`) VALUES ('200002', 'admin2', '12345');
@@ -23,7 +23,7 @@ INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) V
 INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('4', '0', '2023-04-04 16:40:32.000000', 'x2', '98K102897');
 INSERT INTO `history` (`id_history`, `isout`, `time`, `image`, `number_plate`) VALUES ('5', '1', '2023-04-04 17:35:32.000000', 'x1', '18A21443');
 
-INSERT INTO `space` (`id`, `number_space`) VALUES ('1', '1');
+INSERT INTO `parkinglot` (`number_plate`) VALUES ('18A21443');
 
 
 

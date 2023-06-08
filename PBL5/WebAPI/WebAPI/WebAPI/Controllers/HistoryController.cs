@@ -155,8 +155,9 @@ namespace WebAPI.Controllers
             {
                 History history = _context.History.FirstOrDefault(u => u.id_history == model.id_history);
                 Vehicle vehicle = _context.Vehicles.FirstOrDefault(u => u.number_plate == model.number_plate);
+                int number_park = _context.Parking.ToList().Count();
 
-                if (history != null && vehicle == null)
+                if (history != null || vehicle == null || number_park >= 6)
                 {
                     return BadRequest();
                 }

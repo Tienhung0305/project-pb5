@@ -10,6 +10,7 @@ namespace WebAPI.Model
         [Key]
         [Required]
         public int id_person { get; set; }
+        public bool? active { get; set; }
 
         [MaxLength(100)]
         public string? name { get; set; }

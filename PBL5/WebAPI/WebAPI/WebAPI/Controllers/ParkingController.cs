@@ -77,29 +77,35 @@ namespace WebAPI.Controllers
             }
             else
             {                      
-            _context.Parking.Remove(parking);
-            _context.SaveChanges();
-            return Ok();  
+                _context.Parking.Remove(parking);
+                _context.SaveChanges();
+                return Ok();  
             }
         }
 
         [HttpGet]
         public IActionResult CheckState(string number_plate)
         {
-            Parking parking = _context.Parking
-           .Where(u => u.number_plate == number_plate)
-           .FirstOrDefault();
-            if (parking == null)
+            Vehicle vehicle = _context.Vehicles.FirstOrDefault(u => u.number_plate == number_plate);
+            Person person = _context.Person.FirstOrDefault(u => u.id_person == vehicle.id_person);
+            if (vehicle == null || person == null || person.active == false)
             {
-                return Ok(true);
+                return BadRequest();
             }
             else
             {
-                return Ok(false);
+                Parking parking = _context.Parking
+               .Where(u => u.number_plate == number_plate)
+               .FirstOrDefault();
+                if (parking == null)
+                {
+                    return Ok(true);
+                }
+                else
+                {
+                    return Ok(false);
+                }
             }
         }
-
-
-
     }
 }
